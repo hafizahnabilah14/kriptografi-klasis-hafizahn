@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CryptoLab | Klasik Cipher</title>
+    <title>CryptoLab | Hafizah Nabilah</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -12,6 +12,7 @@
             --accent-color: #58a6ff;
             --neon-green: #39ff14;
             --text-color: #c9d1d9;
+            --footer-text: #8b949e;
         }
 
         body {
@@ -24,6 +25,7 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
 
         .container {
@@ -41,9 +43,18 @@
             text-align: center;
             font-family: 'Fira Code', monospace;
             color: var(--accent-color);
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 2px;
+            font-size: 1.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--footer-text);
+            margin-bottom: 1.5rem;
+            font-family: 'Fira Code', monospace;
         }
 
         label { display: block; margin: 10px 0 5px; font-size: 0.9rem; font-weight: 600; }
@@ -96,12 +107,33 @@
             font-family: 'Fira Code', monospace;
             color: var(--neon-green);
         }
+
+        /* Footer Informasi Mahasiswa */
+        .identity-footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed #30363d;
+            text-align: center;
+        }
+
+        .identity-footer p {
+            margin: 3px 0;
+            font-size: 0.85rem;
+            color: var(--footer-text);
+        }
+
+        .identity-name {
+            color: var(--accent-color) !important;
+            font-weight: bold;
+            font-family: 'Fira Code', monospace;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>Cipher Lab</h1>
+    <p class="subtitle">Secure Communication Tools</p>
     
     <label>Pilih Algoritma</label>
     <select id="algo" onchange="toggleKeyInput()">
@@ -124,6 +156,12 @@
         <label>Hasil:</label>
         <div id="result" class="result-text"></div>
     </div>
+
+    <div class="identity-footer">
+        <p class="identity-name">Hafizah Nabilah</p>
+        <p>NPM: 2310020044</p>
+        <p>Mata Kuliah: Sistem Keamanan Informasi</p>
+    </div>
 </div>
 
 <script>
@@ -143,9 +181,8 @@
         }
     }
 
-    // --- LOGIKA KRIPTOGRAFI ---
-
     function caesar(text, shift, encrypt = true) {
+        shift = parseInt(shift) || 0;
         if (!encrypt) shift = (26 - (shift % 26)) % 26;
         return text.split('').map(char => {
             if (char.match(/[a-z]/i)) {
@@ -189,7 +226,7 @@
         let finalResult = "";
 
         if (algo === 'caesar') {
-            finalResult = caesar(text, parseInt(key) || 0, isEncrypt);
+            finalResult = caesar(text, key, isEncrypt);
         } else {
             finalResult = vigenere(text, key, isEncrypt);
         }
